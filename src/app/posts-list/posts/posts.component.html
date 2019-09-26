@@ -1,0 +1,41 @@
+<table class="table table-dark table-hover">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Comments</th>
+    <th>User</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let post of currentPosts.slice(Page * 10, Page * 10 + 10)">
+    <td>{{post.id}}</td>
+    <td>{{post.title}}</td>
+    <td>
+      <button (click)="openModal('custom-modal-1', post.id)">Open Modal 1</button>
+    </td>
+    <td>
+      <button (click)="openAuthor('custom-modal-2', post.userId)">Open Modal 1</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<app-jw-modal id="custom-modal-1">
+  <h1>Comments postId:{{postId}}</h1>
+  <ul>
+    <li *ngFor="let comment of currentComments" >
+      <p>{{comment.body}}</p>
+    </li>
+  </ul>
+  <button (click)="closeModal('custom-modal-1');">Close</button>
+</app-jw-modal>
+
+<app-jw-modal id="custom-modal-2">
+  <h1> userId:{{user.id}}</h1>
+<p>{{user.name}}</p>
+<p>{{user.email}}</p>
+  <button (click)="closeAuthor('custom-modal-2');">Close</button>
+</app-jw-modal>
+
+
+
