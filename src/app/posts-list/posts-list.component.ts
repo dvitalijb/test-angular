@@ -1,14 +1,11 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
-import {PostService} from './post-list.service';
-import {Post} from './post';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ModalService} from '../_modal/modal.service';
-import {CommentsService} from '../_modal/comment.service';
-import {UsersService} from '../_modal/users.service';
+import { Component, OnInit } from '@angular/core';
+import { PostService } from './post-list.service';
+import { Post } from './post';
+import { Router } from '@angular/router';
+import { CommentsService } from '../_modal/comment.service';
+import { UsersService } from '../_modal/users.service';
 
 @Component({
-  // selector: 'app-posts-list',
   templateUrl: './posts-list.component.html',
   styleUrls: ['./posts-list.component.css']
 })
@@ -20,11 +17,11 @@ export class PostsListComponent implements OnInit {
   comments: any = [];
   users: any = [];
 
-  // bodyText: string;
-  constructor(private postService: PostService,
-              private commentsService: CommentsService,
-              private usersService: UsersService,
-              private router: Router
+  constructor(
+    private postService: PostService,
+    private commentsService: CommentsService,
+    private usersService: UsersService,
+    private router: Router
   ) {
   }
 
@@ -33,7 +30,6 @@ export class PostsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.bodyText = 'This text can be updated in modal 1';
     this.commentsService.getComments().subscribe({
       next: comments => {
         this.comments = comments;
@@ -55,7 +51,9 @@ export class PostsListComponent implements OnInit {
     });
 
   }
+
   onCreatePost(): void {
-    this.router.navigate(['/newPost']);
+    this.router.navigate(['/new-post']);
   }
+
 }

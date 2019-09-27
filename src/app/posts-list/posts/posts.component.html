@@ -10,17 +10,17 @@
   <tbody>
   <tr *ngFor="let post of currentPosts.slice(Page * 10, Page * 10 + 10)">
     <td>{{post.id}}</td>
-    <td>{{post.title}}</td>
+    <td (click)="showPost(post.id)">{{post.title}}</td>
     <td>
-      <button (click)="openModal('custom-modal-1', post.id)">Open Modal 1</button>
+      <button (click)="openModal('custom-modal-1', post.id)">Comments</button>
     </td>
     <td>
-      <button (click)="openAuthor('custom-modal-2', post.userId)">Open Modal 1</button>
+      <button (click)="openAuthor('custom-modal-2', post.userId)">Author</button>
     </td>
   </tr>
   </tbody>
 </table>
-<app-jw-modal id="custom-modal-1">
+<app-jw-modal id="custom-modal-1" class="text-center">
   <h1>Comments postId:{{postId}}</h1>
   <ul>
     <li *ngFor="let comment of currentComments" >
@@ -30,7 +30,7 @@
   <button (click)="closeModal('custom-modal-1');">Close</button>
 </app-jw-modal>
 
-<app-jw-modal id="custom-modal-2">
+<app-jw-modal id="custom-modal-2" class="text-center">
   <h1> userId:{{user.id}}</h1>
 <p>{{user.name}}</p>
 <p>{{user.email}}</p>

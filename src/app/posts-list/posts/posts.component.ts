@@ -1,7 +1,6 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {PostService} from '../post-list.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ModalService} from '../../_modal/modal.service';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ModalService } from '../../_modal/modal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-posts',
@@ -19,10 +18,12 @@ export class PostsComponent implements OnChanges, OnInit {
   userId: any;
   user: any;
 
-  constructor(private modalService: ModalService) {
+  constructor(private modalService: ModalService, private router: Router) {
   }
+
   ngOnChanges(changes: SimpleChanges) {
   }
+
   ngOnInit() {
     this.bodyText = 'This text can be updated in modal 1';
   }
@@ -41,12 +42,17 @@ export class PostsComponent implements OnChanges, OnInit {
   openAuthor(id: string, userId: string) {
     this.userId = userId;
     this.modalService.open(id);
-    // this.users.forEach(us => us.id === +userId ? console.log(us.name) : null);
-    this.user = this.users.filter(us => us.id === +userId );
+    this.user = this.users.filter(us => us.id === +userId);
     this.user = this.user[0];
   }
 
   closeAuthor(id: string) {
     this.modalService.close(id);
+  }
+
+  showPost(postId): void {
+    this.router.navigate(['/post', postId]);
+    this.currentComments = this.comments.filter(comment => comment.postId === +postId);
+    this.bodyText = this.currentComments;
   }
 }
