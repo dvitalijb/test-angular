@@ -115,6 +115,10 @@
               "devServerTarget": "test-posts:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }
